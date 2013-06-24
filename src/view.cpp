@@ -1,6 +1,6 @@
 #include "view.h"
 #include <QDebug>
-View::View(QWidget *parent)
+View::View(QWidget */*parent*/)
 {
     scale = 1;
 }
@@ -33,12 +33,13 @@ void View::updatePixmap(const QList<QImage> &images)
 
 void View::rescale(QString s)
 {
-    bool ok;
-    int sscale = atoi(s.toAscii());
-//    if (ok)
+    if (s.endsWith('%'))
     {
-//        scaleBox->setEditText(QString::number(sscale) + QString("%"));
-        scale = (float) sscale/100;
+        s.resize(s.size() - 1);
+    }
+    int sscale =s.toInt();
+    {
+        scale = sscale / 100.f;
     }
     this->update();
 }

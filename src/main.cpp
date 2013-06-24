@@ -1,10 +1,12 @@
-#include <QtGui/QApplication>
+#include <QApplication>
 #include "mainwindow.h"
 #include <QTranslator>
 #include <QLocale>
 #include <QDir>
 #include <QDebug>
 #include <QPainter>
+#include <QScreen>
+#include <QPoint>
 #include "stdio.h"
 #include "stdlib.h"
 
@@ -297,9 +299,19 @@ int main(int argc, char *argv[])
     QTranslator myTranslator;
     myTranslator.load("tile_" + QLocale::system().name(), "qm");
     a.installTranslator(&myTranslator);
-    MainWindow w;
-    w.show();
+    MainWindow window;
+    window.show();
 
-    
+    QScreen* screen = a.screens().at(0);
+    int x = 0, y = 0, w = 0, h = 0;
+    w = screen->virtualSize().width();
+    h = screen->virtualSize().height();
+    x = (w / 2) - window.width() / 2;
+    y = (h / 2) - window.height() / 2;
+    QPoint point = window.pos();
+    x = x - point.x();
+    y = y - point.y();
+    window.move(x, y);
+
     return a.exec();
 }

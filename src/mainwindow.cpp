@@ -3,6 +3,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QTextStream>
+#include <QMimeData>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -294,11 +295,11 @@ void MainWindow::packerUpdate()
             imgdirFile += outFormat.toLower();
             if(outFormat == "JPG")
             {
-                int res = textures.at(i).save(imgdirFile, format, 100);
+                textures.at(i).save(imgdirFile, format, 100);
             }
             else
             {
-                int res = textures.at(i).save(imgdirFile);
+                textures.at(i).save(imgdirFile);
             }
         }
         QMessageBox::information(0, tr("Done"), tr("Your atlas successfully saved in ") + outDir);

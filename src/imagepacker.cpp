@@ -62,7 +62,7 @@ void ImagePacker::pack(int heur, int w, int h)
             summArea -= areaBuf;
         }
         repeat = false;
-        while(summArea > W * H && W * H < w * h)
+        while(summArea > size_t(W * H) && W * H < w * h)
         {
             WH = !WH;
             if(WH)
